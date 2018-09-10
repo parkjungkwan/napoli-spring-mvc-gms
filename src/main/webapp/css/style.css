@@ -1,0 +1,117 @@
+@charset "UTF-8";
+h1, h2, h3, h4, h5, h6{
+	font-size: 1.5em;
+}
+h1{
+	font-size: 2em;
+	padding-bottom: 0;
+	margin-bottom: 0;
+}
+
+table, th, td{
+	border:1px solid gray;
+}
+.menu-box{
+	margin-top: 30px;
+	clear: both;
+}
+.marginTop30px{margin-top: 30px}
+.menu{
+	text-align: right;
+	margin-right: 30px;
+	border-bottom: 1px #8000ff;
+	position: relative;	
+}
+.menu li{
+	display: inline;
+	list-style: none;
+	background-color: #0080ff;
+}
+.menu li a{
+	padding: 10px 20px;
+	background-color: #e985e9;
+	font-weight: bold;
+	text-decoration: none;
+	line-height: 2.8em;
+	color: black;
+}
+.menu li a:hover{
+	padding: 10px 20px;
+	background-color: #e25fe2;
+}
+.menu li a:active{
+	padding: 10px 20px;
+	background-color: #de45de;
+}
+.btnStyle {
+	clear:both;
+	margin:0 auto;
+	text-align: center;
+}
+.btnStyle a{
+	background-color: #e985e9;
+	font-weight: bold;
+	text-decoration: none;
+	line-height: 2.8em;
+	color: black;
+}
+.btnStyle a:hover{
+	background-color: #e25fe2;
+}
+.btnStyle a:active{
+	background-color: #de45de;
+}
+.bgColorYellow{background-color: #ffff00;}
+.center{margin: 0 auto}
+.margin0px{margi: 0}
+.floatRight{float: right}
+.width50pt{width: 50%}
+.width50px{width: 50px}
+.width80pt{width: 80%}
+.width90pt{width: 90%}
+.width100pt{width: 100%}
+.width150px a{width: 150px}
+.width200pt{width: 200%}
+.width200px{width: 200px}
+.width300px{width: 300px}
+.width400px{width: 400px}
+.width400px td{width: 400px}
+.width300px input{width: 300px}
+.height50px{height: 50px}
+.height100pt{height: 100%}
+.height50px input{height: 50px}
+.height50px td{height: 50px}
+.height100px{height: 100px}
+.height400px{height: 400px}
+.marginTop30px{margin-top: 30px}
+.marginTop50px{margin-top: 50px}
+.marginTop300px{margin-top: 250px}
+.marginRight30px{margin-right: 30px}
+.marginLeft200px{margin-left: 200px}
+.marginRight200px{margin-right: 200px}
+.marginBottom0px{margin-bottom: 0px}
+.marginBottom30px{margin-bottom: 30px}
+.marginBottom50px{margin-bottom: 50px}
+.marginBottom150px{margin-bottom: 150px}
+.margetnLeftAuto{margin-left: auto}
+.margetnRightAuto{margin-right: auto}
+.floatRight{float: right}
+.cursor{cursor: pointer}
+.cursor li{cursor: pointer}
+.fontColorBlue{color:blue}
+.fontColorBlack{color:black}
+.textCenter{text-align: center}
+.textCenter input{text-align: center}
+.clearBoth{clear:both}\
+.borderCollapse{border-collapse:collapse}
+.padding0px{padding: 0}
+.padding5px0px{padding:5px 0}
+.padding13px115px a{padding: 13px 115px}
+.padding13px40px a{padding: 13px 40px}
+.fontDefault{font-family: 'Malgun Gothic', 'Verdana'}
+.backgroundColorWhite{background-color: #fff}
+.fontColorGray{color: #808080}
+.positionFixed{position: fixed}
+.pisotionRelative{position: relative}
+.bottom0px{bottom: 0}
+.bgColorDgray{background-color: #292929}
