@@ -1,4 +1,4 @@
-/*"use strict"; 엄격한문법적용-틀리면 에러처리하라!
+"use strict"; 
 var app = app || {};
 app = {
 	init : x=>{
@@ -67,13 +67,10 @@ app = {
 app.session={
 	context : x=>{
 		console.log('Step 2 : '+ x);
-		sessionStorage.setItem('context',x);
-		sessionStorage.setItem('js',x+'/resources/js');
-		sessionStorage.setItem('css',x+'/resources/css');
-		sessionStorage.setItem('img',x+'/resources/img');
+		
 	},
 	path : x=>{
-		return sessionStorage.getItem(x);
+		
 	},
 };
 app.x=()=>{
@@ -97,4 +94,4 @@ user.session = x=>{
 }
 user.get = x=>{
 	return sessionStorage.getItem(x);
-}*/
+}

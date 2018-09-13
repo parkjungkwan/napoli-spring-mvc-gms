@@ -62,39 +62,7 @@ app = {
 	},
 	setContentView : ()=>{
 		console.log('Step 4 : '+app.j());
+		
+		
 	}
 };
-app.session={
-	context : x=>{
-		console.log('Step 2 : '+ x);
-		sessionStorage.setItem('context',x);
-		sessionStorage.setItem('js',x+'/resources/js');
-		sessionStorage.setItem('css',x+'/resources/css');
-		sessionStorage.setItem('img',x+'/resources/img');
-	},
-	path : x=>{
-		return sessionStorage.getItem(x);
-	},
-};
-app.x=()=>{
-	return app.session.path('context');
-};
-app.j=()=>{
-	return app.session.path('js');
-};
-app.c=()=>{
-	return app.session.path('css');
-};
-app.i=()=>{
-	return app.session.path('img');
-};
-var user = user || {};
-user.session = x=>{
-	$.each(x, function(k,v){
-		/*alert('key:'+k+', value:'+v)*/
-		sessionStorage.setItem(k,v);
-	});
-}
-user.get = x=>{
-	return sessionStorage.getItem(x);
-}
