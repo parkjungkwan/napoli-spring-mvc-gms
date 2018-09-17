@@ -18,5 +18,11 @@ $.prototype.zeroChecker=x=>{
         }
     }
     return flag;
-}	
+}
+
+
+
+
+
+
 

@@ -13,96 +13,150 @@ algo = {
         $('#wrapper').empty();
     }
 };
-algo.main = {
+algo.main = (()=>{
+	var $wrappper,ctx,img,script,style,
+		compo,json,$t__l,$t__r
+	;
+	var onCreate = ()=>{
+		ctx = $.ctx();
+		img = $.img();
+		script = $.script();
+		style = $.style();
+		compo = script+'/compo.js';
+    	setContentView();
+    };
+    var setContentView = ()=>{
+    	$('#wrapper').html('<h1>알고리즘</h1><span id="seq">수 열</span>'
+    			+'<span id="appl">응 용</span><div id="ctn">'
+        		+'<table id="tbl" style="width:800px;height:300px;'
+        		+'border-collapse: collapse;border: 1px solid black;margin:0 auto">'
+        		+ '<tr style="border: 1px solid black;">'
+        		+  '<td id="t__l" style="width: 50%;border: 1px solid black;"></td>'
+        		+  '<td id="t__r" style="width: 50%;border: 1px solid black;"></td>'
+        		+ '</tr>'
+        		+'</table>'
+        		+'</div>');
+            $t__l = $('#t__l');
+            $t__r = $('#t__r');
+        /*   	$('#appl').click(x=>{
+           		alert('appl click');
+				$t__l.empty();
+				// '화폐문제'
+				$.getScript(compo,()=>{
+					ui.anchor({txt:'화폐문제'})
+					.$t__l
+					;
+					
+				});
+			});*/
+            $("<ul />")
+            .attr({id : 'side__menu'})
+            .addClass('list-group').appendTo($t__l);
+           $('<li/>')
+           .attr({id : 'arith'})
+           .addClass('list-group-item')
+           .appendTo($('#side__menu'));
+           $('<a/>')
+           .attr({href : '#'})
+           .html('등차수열의 합').appendTo($('#arith'))
+           .click(e=>{
+        	$t__r.empty();
+           	$('<div/>').attr({id:'ques'}).appendTo($t__r);
+           	$('<h4/>').html('시작값 x, 마지막값 y, 공차 d 인 등차수열의 합을 구하시오.').appendTo($('#ques'));
+           	let arr = [{id:'sta', label:'시작값'},
+           		{id:'end', label:'마지막값'},
+           		{id:'diff', label:'공차'}];
+        	$.each(arr,(i,j)=>{
+           		$('<label/>').html(j.label).appendTo($('#'+'ques'));
+               	$('<input/>').attr({id: j.id,type:'text'}).appendTo($('#ques'));
+               	$('<br/>').appendTo($('#ques'));
+           	});
+           	$('<button/>')
+           	.addClass('btn btn-primary')
+           	.attr({type:'button'})
+           	.html('결과보기')
+           	.appendTo($('#ques'))
+           	.click(e=>{
+           		$('#h6').remove();
+           		let res = "숫자를 입력하세요";
+    			let a = $.fn.zeroChecker(
+    						[$('#sta').val(),
+    						$('#end').val(),
+    						$('#diff').val()]
+    					);
+    			if(!a){
+    				let sta = $('#sta').val()*1;
+    				let end = $('#end').val()*1;
+    				let diff = $('#diff').val()*1;
+    				console.log(sta+','+end+','+diff);
+    				let i = sta;
+    				let sum = 0;
+    				while(i<=end){
+    					sum=sum+i;
+    					i=i+diff;
+    				}
+    				res = sum;
+    			}
+    			$('<h6/>').attr({id:"h6"}).appendTo('#ques').text(res);
+           	});
+        });
+       	$('#appl').click(x=>{
+       		alert('appl click');
+			$t__l.empty();
+			$.getScript(compo,()=>{
+				
+				ui.ul({len : 3,id: 'menu'}).appendTo($t__l);
+				ui.anchor({txt:'화폐문제'})
+				.appendTo($('#menu-0'))
+				.click(x=>{
+					$('<h6>화폐문제</h6>')
+					.appendTo($t__r);
+					ui.input2({
+						input__id : 'money',
+						div__val : '입금액'
+					})
+					.appendTo($t__r);
+					
+				})
+				;
+			});
+			
+		});
+        /*    $('#t__l').html('<a id="arith__seq"><h3>등차수열</h3></a>');
+            $('#t__l').append('<a id="swit__seq"><h3>스위치수열</h3></a>');
+            $('#t__l').append('<a id="fibo__seq"><h3>피보나치수열</h3></a>');
+            $('#t__l').append('<a id="fact__seq"><h3>팩토리얼수열</h3></a>');
+            $('#t__l').empty()
+            $('#t__l').html('<a id="arith__seq"><h3>등차수열</h3></a>');
+            $('#t__l').append('<a id="swit__seq"><h3>스위치수열</h3></a>');
+            $('#t__l').append('<a id="fibo__seq"><h3>피보나치수열</h3></a>');
+            $('#t__l').append('<a id="fact__seq"><h3>팩토리얼수열</h3></a>');
+            $('#swit__seq').click(e=>{
+            	alert('스위치수열 선택');
+            });
+            $('#fibo__seq').click(e=>{
+            	alert('피보나치수열 선택');
+            });
+            $('#fact__seq').click(e=>{
+            	alert('팩토리얼수열 선택');
+            });
+            */
+    }; // setContentView.end
+    return {
+    	onCreate : onCreate,
+    	setContentView : setContentView
+    };
+    
+})();
+/*algo.main = {
+	 	
     onCreate:()=>{
     	algo.main.setContentView();
     },
     setContentView : ()=>{
-        $('#wrapper').html('<h1>알고리즘</h1><h3>수 열</h3><div id="ctn">'
-    		+'<table id="tbl" style="width:800px;height:300px;'
-    		+'border-collapse: collapse;border: 1px solid black;margin:0 auto">'
-    		+ '<tr style="border: 1px solid black;">'
-    		+  '<td id="t__l" style="width: 50%;border: 1px solid black;"></td>'
-    		+  '<td id="t__r" style="width: 50%;border: 1px solid black;"></td>'
-    		+ '</tr>'
-    		+'</table>'
-    		+'</div>');
-        let $t__l = $('#t__l');
-        let $t__r = $('#t__r');
-        $("<ul />")
-        .attr({id : 'side__menu'})
-        .addClass('list-group').appendTo($t__l);
-       $('<li/>')
-       .attr({id : 'arith'})
-       .addClass('list-group-item')
-       .appendTo($('#side__menu'));
-       $('<a/>')
-       .attr({href : '#'})
-       .html('등차수열의 합')
-       .appendTo($('#arith'))
-       .click(e=>{
-    	$t__r.empty();
-      /* 	let ques = 
-    		'<div id="ques"><h4>시작값 x, 마지막값 y, 공차 d 인 등차수열의 합을 구하시오.<h4>'
-    		+'    <label for="시작값">시작값</label><input id="sta" type="text" value="">'
-    		+'    <label for="마지막값">마지막값</label><input id="end" type="text" value="">'
-    		+'    <label for="공차">공차</label><input id="diff" type="text" value="">'
-    		+'    <button id="bt">결과보기</button>'
-    		+'    <h6 id="rs"></h6></div>'
-    	;*/
-       	$('<div/>')
-       	.attr({id:'ques'}).appendTo($t__r);
-       	$('<h4/>')
-       	.html('시작값 x, 마지막값 y, 공차 d 인 등차수열의 합을 구하시오.').appendTo($('#ques'));
-       	$('<label/>').html('시작값').appendTo($('#ques'));
-       	$('<input/>')
-       	.attr({id:'sta',type:'text'}).appendTo($('#ques'));
-       	$('<label/>').html('마지막값').appendTo($('#ques'));
-       	$('<input/>')
-       	.attr({id:'end',type:'text'}).appendTo($('#ques'));
-       	$('<label/>').html('공차').appendTo($('#ques'));
-       	$('<input/>')
-       	.attr({id:'diff',type:'text'}).appendTo($('#ques'));
-       	$('<br/>').appendTo($('#ques'));
-       	$('<button/>')
-       	.addClass('btn btn-primary')
-       	.attr({type:'button'})
-       	.html('결과보기')
-       	.appendTo($('#ques'))
-       	.click(e=>{
-       		console.log(rs);
-    		$('<h6/>')
-    		.empty().text(
-    			($.fn.zeroChecker(
-    	        [$('#sta').val(),
-    	        $('#end').val(),
-    	        $('#diff').val()]))?
-    	        		'빈칸을 채우세요'
-    	        		:'완성하세요'
-    		);
-       	});
-    });
-    /*    $('#t__l').html('<a id="arith__seq"><h3>등차수열</h3></a>');
-        $('#t__l').append('<a id="swit__seq"><h3>스위치수열</h3></a>');
-        $('#t__l').append('<a id="fibo__seq"><h3>피보나치수열</h3></a>');
-        $('#t__l').append('<a id="fact__seq"><h3>팩토리얼수열</h3></a>');
-        $('#t__l').empty()
-        $('#t__l').html('<a id="arith__seq"><h3>등차수열</h3></a>');
-        $('#t__l').append('<a id="swit__seq"><h3>스위치수열</h3></a>');
-        $('#t__l').append('<a id="fibo__seq"><h3>피보나치수열</h3></a>');
-        $('#t__l').append('<a id="fact__seq"><h3>팩토리얼수열</h3></a>');
-        $('#swit__seq').click(e=>{
-        	alert('스위치수열 선택');
-        });
-        $('#fibo__seq').click(e=>{
-        	alert('피보나치수열 선택');
-        });
-        $('#fact__seq').click(e=>{
-        	alert('팩토리얼수열 선택');
-        });
-        */
+        
     }
-};
+};*/
 algo.series = {
 	arith : x =>{
 		
@@ -127,7 +181,9 @@ algo.matrix = {
 algo.math = {
 		
 };
-algo.appl = {};
+algo.appl = {
+		
+};
 
 algo.router = {
 	onCreate : x=>{
@@ -135,7 +191,9 @@ algo.router = {
 			()=>{
 				$.extend(new Session(x));
 				$.getScript($.ctx()+'/resources/js/util.js')
-        		.done(x=>{console.log('실행');})
+        		.done(x=>{
+        			console.log('실행');
+        		})
         		.fail(x=>{console.log('실패')});
 				algo.main.onCreate();
 			}	
