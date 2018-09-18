@@ -5,71 +5,53 @@ var ui={
 	anchor : x=>{  // ui.anchor({txt:'TEST'});
 		return $('<a/>').attr({href : '#'}).html(x.txt);},
 	ul : x=>{ 
-		let ul = $('<ul/>');
+		let y = $('<ul/>');
 		for(var i=0;i<x.len;i++){
 			$('<li/>').attr({
 				id : x.id+'-'+i
-			}).appendTo(ul);
+			}).appendTo(y);
 		}
-		return ul;
+		return y;
 	},
 	input : x=>{ // id,val
-		let p = ui.div({}).addClass("input-group mb-3");
+		let y = ui.div({}).addClass("input-group mb-3");
 		(ui.div({id:'input-group-prepend'})
 				.addClass("input-group-prepend"))
 				.html('<span class="input-group-text" id="basic-addon1">'
-						+ x.div__val
-						+'</span>').appendTo(res);
-		/*ui.span({
-			id: "basic-addon1",
-			value: x.div__val
-		}).appendTo($('#input-group-prepend'));*/
+						+ x.txt
+						+'</span>').appendTo(y);
 		$("<input/>").attr({
-			id : x.input__id,
+			id : x.id,
 			type: 'text',
 			placeholder:"입금액" ,
 			"aria-label":"Username", 
 			"aria-describedby":"basic-addon1"
-		}).addClass("form-control").appendTo(res);
-		return res;
-		
-		
-		
-
+		}).addClass("form-control").appendTo(y);
+		return y;
 	},
 	label : x=>{
 		return $('<label/>')
 				.attr('for',x.id).text(x.txt)
 	},
-	/*
-	<div class="input-group mb-3">
-	  <div class="input-group-prepend">
-	    <span class="input-group-text" id="basic-addon1">@</span>
-	  </div>
-	  <input type="text" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1">
-	</div>
-	
-	*/
-	input2 : x =>{
-		let p = ui.div({}).addClass("input-group mb-3");
-		ui.div({id:'test'}).addClass("input-group-prepend").appendTo(p);
-		$('#test').html('  <span class="input-group-text" id="basic-addon1">@</span> ');
-		$("<input/>").attr({
-			id : x.input__id,
-			type: 'text',
-			placeholder:"입금액" ,
-			"aria-label":"Username", 
-			"aria-describedby":"basic-addon1"
-		}).addClass("form-control").appendTo(res);
-		return p;
-	},
-	inputGroupPrepend : x =>{
-		return 	'<div class="input-group mb-3">'
-		  +'<div class="input-group-prepend">'
-		  +'  <span class="input-group-text" id="basic-addon1">@</span> '
-		  +'</div>'
-		  +'<input type="text" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1">'
-		+'</div>'
+	btn : x=>{
+/***************
+<button type="button" 
+	class="btn btn-primary">
+	Primary
+</button>
+primary(blue)
+secondary(gray)
+success(green)
+danger(red)
+warning(yellow)
+info(dark green)
+dark(black)
+light(white)
+link(trans)
+***************/
+		return $('<button/>').attr('type','button')
+				.addClass('btn btn-'+x.clazz)
+				.html(x.txt);
 	}
 }
 /*

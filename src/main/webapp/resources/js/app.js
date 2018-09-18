@@ -1,12 +1,12 @@
 "use strict"; 
 var app = app || {};
-app = {
-	init : x=>{
-		console.log('Step 1');
-		app.session.context(x);
+/*app = (x=>{
+	var init =x=>{
+		console.log('Step 1'+x);
+		algo.router.init(x);
 		app.onCreate();
-	}, 
-	onCreate : ()=>{
+	}; 
+	var onCreate=()=>{
 		console.log('Step 3');
 		app.setContentView();
 		$('#login_btn').click(()=>{
@@ -59,39 +59,122 @@ app = {
 				method: "post"
 			}).submit();
 		});
-	},
-	setContentView : ()=>{
-		console.log('Step 4 : '+app.j());
-	}
-};
-app.session={
-	context : x=>{
-		console.log('Step 2 : '+ x);
+	};
+	var setContentView=()=>{
+		console.log('Step 4 : '+$.ctx());
+	};
+	return {
+		init : init
+	};
+})();*/
+app =(()=>{
+	var init =x=>{
+		console.log('Step 1'+x);
+		app.router.init(x);
+	};
+	return {init : init};
+})();
+app.main=(()=>{
+	var w,header,footer,content,nav,ctx,script,style,img;
+	var init =()=>{
+		ctx = $.ctx();
+		script = $.script();
+		style = $.style();
+		img = $.img();
+		w = $('#wrapper');
+		header = script+'/header.js';
+		content = script+'/content.js';
+		nav = script+'/nav.js';
+		footer = script+'/footer.js';
+		onCreate();
+	};
+	var onCreate =()=>{
+		setContentView();
+	};
+	var setContentView =()=>{
+		/*$.getScript(header,()=>{
+			w.html(headerUI());
+		});*/
+		///
+		$.when(
+	            $.getScript($.script()+'/header.js'),
+	            $.getScript($.script()+'/content.js'),
+	            $.getScript($.script()+'/nav.js'),
+	            $.getScript($.script()+'/footer.js'),
+	            $.Deferred(y=>{
+	                $(y.resolve);
+	            })
+	        ).done(z=>{
+	        	w.html(
+	        			navUI()
+	        			+headerUI()
+	        			+contentUI(ctx)
+	        			+footerUI()
+	        			);
+	        	$('#login_btn').click(e=>{
+	        		app.permission.login();	
+	        	});
+	        	$('#board').click(e=>{
+	        		app.board.init();
+	        	});
+	        })
+	        .fail(x=>{
+	        	console.log('로드 실패');
+	        });
+		///
+       // 자스 Promise 비동기 로직 다루기
+      /*  $.when(
+            $.getScript($.script()+'/header.js'),
+            $.getScript($.script()+'/nav.js'),
+            $.getScript($.script()+'/content.js'),
+            $.getScript($.script()+'/footer.js'),
+            $.Deferred(x=>{
+            	console.log('step3'+header()); 
+            })
+        ).done(x=>{
+        	console.log('step4'); 
+        });*/
 		
-	},
-	path : x=>{
+	};
+	return {init : init};
+})();
+app.board = (()=>{
+	var init =()=>{
+		onCreate();
+	};
+	var onCreate =()=>{
+		setContentView();
+	};
+	var setContentView =()=>{
+		alert('Board');
+		$('#header').remove();
+		$('#content').empty();
 		
-	},
-};
-app.x=()=>{
-	return app.session.path('context');
-};
-app.j=()=>{
-	return app.session.path('js');
-};
-app.c=()=>{
-	return app.session.path('css');
-};
-app.i=()=>{
-	return app.session.path('img');
-};
-var user = user || {};
-user.session = x=>{
-	$.each(x, function(k,v){
-		alert('key:'+k+', value:'+v)
-		sessionStorage.setItem(k,v);
-	});
-}
-user.get = x=>{
-	return sessionStorage.getItem(x);
-}
+	};
+	return {init:init};
+})();
+app.permission = (()=>{
+	var login =()=>{
+		alert('login');
+		$('#header').remove();
+		$('#content').empty();
+		
+	};
+	return {login : login};
+})();
+app.router = {
+	init : x=>{
+		$.getScript(x+'/resources/js/router.js',
+			()=>{
+				$.extend(new Session(x));
+				$.getScript($.ctx()+'/resources/js/util.js')
+        		.done(x=>{
+        			console.log('실행');
+        			app.main.init();
+        		})
+        		.fail(x=>{console.log('실패')});
+				
+			}	
+		);
+		}
+	};
