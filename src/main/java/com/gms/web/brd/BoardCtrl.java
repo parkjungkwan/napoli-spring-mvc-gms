@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 public class BoardCtrl {
 	static final Logger logger = LoggerFactory.getLogger(BoardCtrl.class);
 	@Autowired Article articleDTO;
-	@Autowired BoardService boardService;
 	@RequestMapping(value="/add",method=RequestMethod.POST)
 	public String add() {
 		logger.info("\n--------- MemberController {} !!-----","add()");

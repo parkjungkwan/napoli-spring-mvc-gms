@@ -11,7 +11,4 @@ public class Member {
 	private String userid, password, 
 	name, ssn, age, gender, teamid, 
 	roll, subject, email, phone;
-	public Member() {
-		
-	}
 }

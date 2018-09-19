@@ -18,15 +18,13 @@ public class HomeCtrl {
 	static final Logger logger = LoggerFactory.getLogger(HomeCtrl.class);
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String home(Model model, HttpServletRequest request) {
-		model.addAttribute("context", Util.ctx.apply(request) );
+		model.addAttribute("context", YoonHo.ctx.apply(request) );
 		return "main";
 	}
 	@RequestMapping(value="/move/{prefix}/{dir}/{page}")
-	public String move(
-			@PathVariable String prefix,
+	public String move(@PathVariable String prefix,
 			@PathVariable String dir,
-			@PathVariable String page
-			) {
+			@PathVariable String page) {
 		logger.info("HomeController ::: move() {}.", "ENTER");
 		return prefix+":"+dir+"/"+page+".tiles";
 	}

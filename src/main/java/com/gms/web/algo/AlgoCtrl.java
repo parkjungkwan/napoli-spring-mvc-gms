@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.gms.web.brd.BoardCtrl;
-import com.gms.web.cmm.Util;
+import com.gms.web.cmm.YoonHo;
 
 @RestController
 @RequestMapping("/algo")
@@ -23,13 +23,13 @@ public class AlgoCtrl {
 	
 	@GetMapping("/money/{money}")
 	public void money(@PathVariable String money) {
-		Util.log.accept("넘어온 화폐값: "+money);
+		YoonHo.log.accept("넘어온 화폐값: "+money);
 	}
 	@PostMapping("/money/")
 	public @ResponseBody Map<String,Object>
 		money2(@RequestBody Map<String,Object>map) {
 		Map<String,Object>rmap = new HashMap<>();
-		Util.log.accept("넘어온 화폐값: "+map.get("money"));
+		YoonHo.log.accept("넘어온 화폐값: "+map.get("money"));
 		rmap.put("test", "축하축하 !! ");
 		return rmap;
 	}

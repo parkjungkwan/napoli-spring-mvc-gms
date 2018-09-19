@@ -3,36 +3,37 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.gms.web.mbr.MemberMapper">
-  <insert id="insert" >
-    INSERT INTO member
-    (USERID, PASSWORD, NAME, SSN, AGE, GENDER, TEAMID, ROLL, SUBJECT, EMAIL, PHONE)
-    VALUES (#{userid}, #{password}, #{name}, #{ssn}, #{age}, #{gender}, #{teamid}, #{roll}, #{subject}, #{email}, #{phone})
-  </insert>
-  <select id="selectOne" resultType="com.gms.web.mbr.Member">
-    SELECT USERID, NAME, SSN, AGE, GENDER, TEAMID, ROLL, PHONE, EMAIL FROM member
-    WHERE USERID LIKE #{userid}
-  </select>
-  <select id="login" resultType="string">
-    SELECT COUNT(USERID) FROM member
-    WHERE USERID LIKE #{userid}
-    AND PASSWORD LIKE #{password}
-  </select>
-  <select id="exist" resultType="string">
-    SELECT USERID FROM member
-    WHERE USERID LIKE #{userid}
-  </select>
-  <update id="update">
-	  UPDATE member SET
-	    PASSWORD = #{password},
-	    TEAMID = #{teamid},
-	    ROLL = #{roll},
-	    PHONE = #{phone},
-	    EMAIL = #{email}
-	  WHERE USERID = #{userid}
-  </update>
-  <delete id="delete">
-	  DELETE FROM member
-	  WHERE USERID = #{userid}
-	  AND PASSWORD = #{password}
-  </delete>
+	<insert id="post">
+		INSERT INTO member
+		(USERID, PASSWORD, NAME, SSN, AGE, GENDER, TEAMID, ROLL, SUBJECT, EMAIL,
+		PHONE)
+		VALUES (#{userid}, #{password}, #{name}, #{ssn}, #{age}, #{gender},
+		#{teamid}, #{roll}, #{subject}, #{email}, #{phone})
+	</insert>
+	<select id="list" resultType="com.gms.web.mbr.Member">
+		SELECT USERID, NAME, SSN, AGE, GENDER, TEAMID, ROLL, PHONE, EMAIL 
+		FROM MEMBER
+	</select>
+	<select id="get" resultType="com.gms.web.mbr.Member">
+		SELECT USERID, PASSWORD, NAME, SSN, AGE, GENDER, 
+			TEAMID, ROLL, PHONE, EMAIL 
+		FROM MEMBER
+		<where>
+			<if test=" userid != null and userid != '' ">
+				USERID LIKE #{userid}
+			</if>
+			<if test=" password != null and password != '' ">
+				AND PASSWORD LIKE #{password}
+			</if>
+		</where>
+	</select>
+	<select id="count" resultType="int">
+		SELECT COUNT(*) FROM MEMBER
+		<where>
+			<if test=" userid != null and userid != '' ">
+				USERID LIKE #{userid}
+			</if>
+		</where>
+	</select>
 </mapper>
+
