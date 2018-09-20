@@ -1,0 +1,34 @@
+package com.gms.web.cmm;
+
+import java.util.HashMap;
+import java.util.Map;
+
+import org.springframework.context.annotation.Lazy;
+import org.springframework.http.MediaType;
+import org.springframework.stereotype.Component;
+
+import com.gms.web.reply.Reply;
+
+import lombok.Data;
+@Component
+@Data @Lazy
+public class MediaUtils {
+	
+	private static Map<String, MediaType> mediaMap;
+	
+	static{
+		
+		mediaMap = new HashMap<String, MediaType>();		
+		mediaMap.put("JPG", MediaType.IMAGE_JPEG);
+		mediaMap.put("GIF", MediaType.IMAGE_GIF);
+		mediaMap.put("PNG", MediaType.IMAGE_PNG);
+	}
+	
+	public static MediaType getMediaType(String type){
+		
+		return mediaMap.get(type.toUpperCase());
+	}
+}
+
+
+

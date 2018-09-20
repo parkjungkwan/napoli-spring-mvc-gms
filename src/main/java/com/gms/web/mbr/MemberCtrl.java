@@ -28,16 +28,7 @@ public class MemberCtrl {
 		logger.info("\n MemberCtrl ::::: {} ","add()");
 		 YoonHo.log.accept("MbrCtrl add");
 		 mbr = prm;
-        /*if(YoonHo.isNull.negate().test(mbrMap.exist(mbr.getUserid()))) {
-        	mbr.setSsn(mbr.getAge()+"-"+mbr);
-            mbr = tae.convertSSNtoAgeAndGender(mbr);
-            mbr.setGender(mbr.getGender());		
-            mbr.setAge(mbr.getAge());
-            mbrMap.insert(mbr);
-            return "redirect:/move/auth/mbr/login";
-        }else {
-            return "";
-        }*/
+		 
 		return null;
 	}
 	@RequestMapping("/list")
