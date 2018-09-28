@@ -52,26 +52,81 @@ link(trans)
 		return $('<button/>').attr('type','button')
 				.addClass('btn btn-'+x.clazz)
 				.html(x.txt);
+	},
+	table : x=>{
+/*
+<div class="panel panel-default">
+  <!-- Default panel contents -->
+  <div class="panel-heading">Panel heading</div>
+  <div class="panel-body">
+    <p>...</p>
+  </div>
+  <!-- Table -->
+  <table class="table">
+    ...
+  </table>
+</div>
+			type, id, head,desc, list
+
+		 * */
+		let d = $('<div class="panel panel-'+x.type+'"/>');
+		let ph = $('<div class="panel-heading"/>');
+		let pb = $('<div class="panel-body"/>');
+		$('<p/>').html(x.body).appendTo(pb);
+		let t = $('<table id="'+x.id+'"/>').addClass(x.clazz);
+		let thead = $('<thead/>');
+	    let tr = $('<tr/>');
+	    $.each(x.list,(i,j)=>{
+	    	$('<th/>')
+	    	.html(j)
+	    	.appendTo(tr);
+	    });
+	    tr.appendTo(thead);
+	    thead.appendTo(t);
+	    $('<tbody/>').appendTo(t);
+	    ph.appendTo(d);
+	    pb.appendTo(d);
+	    t.appendTo(d);
+		return d;
+	},
+	page : x=>{
+		return $('<ul class="pagination"/>')
+			.appendTo($('<nav/>')
+			.attr('aria-label','...'));
 	}
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
 /*
- * 
-let ul = $('<ul/>');
-		 // x 는 json 의 array
-		$( "div" ).each(function( index, element ) {
-		    // element == this
-		    $( element ).css( "backgroundColor", "yellow" );
-		    if ( $( this ).is( "#stop" ) ) {
-		      $( "span" ).text( "Stopped at div index #" + index );
-		      return false;
-		    }
-       $('<ul/>').each(function(3,$('<li/>')){
-				$(this).appendTo(ul);
-			}
-   		);
-		ul
-		.attr({id : x.id})
-        .addClass('list-group');
-		return ul;
- * 
- */
+<nav aria-label="...">
+  <ul class="pagination">
+    <li class="page-item disabled">
+      <span class="page-link">Previous</span>
+    </li>
+    <li class="page-item"><span class="page-link" href="#">1</span></li>
+    <li class="page-item active">
+      <span class="page-link">
+        2
+        <span class="sr-only">(current)</span>
+      </span>
+    </li>
+    <li class="page-item"><span class="page-link" href="#">3</span></li>
+    <li class="page-item">
+      <span class="page-link" href="#">Next</span>
+    </li>
+  </ul>
+</nav>
+*/
+
+
