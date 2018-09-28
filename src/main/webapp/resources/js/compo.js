@@ -66,7 +66,7 @@ link(trans)
     ...
   </table>
 </div>
-			type, id, head,desc, list
+type, id, head,desc, list
 
 		 * */
 		let d = $('<div class="panel panel-'+x.type+'"/>');
@@ -94,6 +94,26 @@ link(trans)
 			.appendTo($('<nav/>')
 			.attr('aria-label','...'));
 	}
+	/*
+	<nav aria-label="...">
+	  <ul class="pagination">
+	    <li class="page-item disabled">
+	      <span class="page-link">Previous</span>
+	    </li>
+	    <li class="page-item"><span class="page-link" href="#">1</span></li>
+	    <li class="page-item active">
+	      <span class="page-link">
+	        2
+	        <span class="sr-only">(current)</span>
+	      </span>
+	    </li>
+	    <li class="page-item"><span class="page-link" href="#">3</span></li>
+	    <li class="page-item">
+	      <span class="page-link" href="#">Next</span>
+	    </li>
+	  </ul>
+	</nav>
+	*/	
 }
 
 
@@ -108,25 +128,6 @@ link(trans)
 
 
 
-/*
-<nav aria-label="...">
-  <ul class="pagination">
-    <li class="page-item disabled">
-      <span class="page-link">Previous</span>
-    </li>
-    <li class="page-item"><span class="page-link" href="#">1</span></li>
-    <li class="page-item active">
-      <span class="page-link">
-        2
-        <span class="sr-only">(current)</span>
-      </span>
-    </li>
-    <li class="page-item"><span class="page-link" href="#">3</span></li>
-    <li class="page-item">
-      <span class="page-link" href="#">Next</span>
-    </li>
-  </ul>
-</nav>
-*/
+
 
 

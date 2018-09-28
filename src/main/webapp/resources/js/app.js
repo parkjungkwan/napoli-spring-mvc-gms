@@ -47,58 +47,7 @@ app.board = (()=>{
 	var setContentView =()=>{
 		$('#header').remove();
 		$('#content').empty();
-		$.getJSON(ctx+'/boards/1',d=>{
-			$.getScript($.script()+'/compo.js',()=>{
-				let x = {
-						type : 'default', 
-						id : 'table', 
-						head : '게시판',
-						body : '오픈 게시판 ... 누구든지 사용가능',
-						list : ['No','제목','내용','글쓴이','작성일','조회수'],
-						clazz : 'table table-bordered'
-				};
-				(ui.table(x))
-				.appendTo($('#content'));
-			    $.each(d.list,(i,j)=>{
-			    	$('<tr/>').append(
-			    	$('<td/>').attr('width','5%').html(j.bno),
-			    	$('<td/>').attr('width','10%').html(j.title),
-			    	$('<td/>').attr('width','50%').html(j.content),
-			    	$('<td/>').attr('width','10%').html(j.writer),
-			    	$('<td/>').attr('width','10%').html(j.regdate),
-			    	$('<td/>').attr('width','5%').html(j.viewcnt)
-			    	).appendTo($('tbody'));
-			    });
-			    ui.page({}).appendTo($('#content'));
-			    let ul = $('.pagination');
-			    let existPrev = d.page.existPrev;
-				let existNext = d.page.existNext;
-				let prev = '', next = '';
-				if(!existPrev){
-					prev = 'disabled';
-				}
-				if(!existNext){
-					next = 'disabled';
-				}
-				let preli = $('<li id="prev" class="page-item '+prev+'"><span class="page-link">◀</span>');
-				let nextli = $('<li id="next"  class="page-item '+next+'""><span class="page-link">▶</span>');
-				preli.appendTo(ul);
-				for(let i=d.page.beginPage;i<=d.page.endPage;i++){
-					$('<span/>')
-							.addClass('page-link')
-							.html(i)
-							.click(e=>{
-								alert('나는 '+i+'를 눌렀다');
-								
-							})
-							.appendTo($('<li  class="page-item"/>'))
-							.appendTo(ul);
-				}
-	
-				nextli.appendTo(ul);
-			    $('.page-link').attr('style',"cursor:pointer");
-			});
-		});
+		app.service.boards(1);
 	};
 	return {init:init};
 })();
@@ -202,6 +151,63 @@ app.permission = (()=>{
 	};
 	return {login : login, join : join};
 })();
+app.service = {
+	boards : x=>{
+		$.getJSON($.ctx()+'/boards/'+x,d=>{
+			$.getScript($.script()+'/compo.js',()=>{
+				let x = {
+						type : 'default', 
+						id : 'table', 
+						head : '게시판',
+						body : '오픈 게시판 ... 누구든지 사용가능',
+						list : ['No','제목','내용','글쓴이','작성일','조회수'],
+						clazz : 'table table-bordered'
+				};
+				(ui.table(x))
+				.appendTo($('#content'));
+			    $.each(d.list,(i,j)=>{
+			    	$('<tr/>').append(
+			    	$('<td/>').attr('width','5%').html(j.bno),
+			    	$('<td/>').attr('width','10%').html(j.title),
+			    	$('<td/>').attr('width','50%').html(j.content),
+			    	$('<td/>').attr('width','10%').html(j.writer),
+			    	$('<td/>').attr('width','10%').html(j.regdate),
+			    	$('<td/>').attr('width','5%').html(j.viewcnt)
+			    	).appendTo($('tbody'));
+			    });
+			    ui.page({}).appendTo($('#content'));
+			    let ul = $('.pagination');
+			    let existPrev = d.page.existPrev;
+				let existNext = d.page.existNext;
+				let prev = '', next = '';
+				if(!existPrev){
+					prev = 'disabled';
+				}
+				if(!existNext){
+					next = 'disabled';
+				}
+				let preli = $('<li id="prev" class="page-item '+prev+'"><span class="page-link">◀</span>');
+				let nextli = $('<li id="next"  class="page-item '+next+'""><span class="page-link">▶</span>');
+				preli.appendTo(ul);
+				for(let i=d.page.beginPage;i<=d.page.endPage;i++){
+					$('<li  class="page-item"/>')
+					.addClass((i==d.page.pageNumber)?'active':'')
+					.append($('<span/>')
+					.addClass('page-link')
+					.html(i)).appendTo(ul)
+					.click(e=>{
+						alert('나는 '+i+'를 눌렀다');
+						$.getJSON('',e=>{});
+						app.board.init(i);
+					})
+					;
+				}
+				nextli.appendTo(ul);
+			    $('.page-link').attr('style',"cursor:pointer");
+			});
+		});
+	}	
+};
 app.router = {
 	init : x=>{
 		$.getScript(x+'/resources/js/router.js',
